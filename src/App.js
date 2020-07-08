@@ -22,7 +22,7 @@ function App() {
       apiGet().then(response => setData(response.data))
       setIsLoading(false)
     }
-  }, [])
+  }, [data])
 
   const changeBase = (event) => {
     const currencyCode = event.target.value
