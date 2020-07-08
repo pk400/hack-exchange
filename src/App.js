@@ -22,7 +22,7 @@ function App() {
       apiGet().then(response => setData(response.data))
       setIsLoading(false)
     }
-  })
+  }, [])
 
   const changeBase = (event) => {
     const currencyCode = event.target.value
@@ -48,7 +48,7 @@ function App() {
       <span className='inline-block mt-3'>Quick and easy currency conversion tool for various countries.</span>
       <div className='mt-6 mb-6'>
         <label htmlFor='base'>Base</label>
-        <select id='base' className='ml-3 mr-3 p-2' onChange={changeBase} value={currentBase}>
+        <select id='base' className='ml-3 mr-3 p-2 shadow-md rounded-md focus:outline-none' onChange={changeBase} value={currentBase}>
           {
             'rates' in data ? Object.keys(data.rates).sort().map((currencyCode, key) => {
             return <option key={key} value={currencyCode}>{Config.flags[currencyCode]} {currencyCode}</option>
@@ -56,9 +56,9 @@ function App() {
           }
         </select>
         <label htmlFor='value'>Amount</label>
-        <input id='value' value={amount} onChange={(event) => setAmount(event.target.value)} type='number' step='0.01' min='0.01' className='ml-3 p-2' />
+        <input id='value' value={amount} onChange={(event) => setAmount(event.target.value)} type='number' step='0.01' min='0.01' className='ml-3 p-2 shadow-md rounded-md focus:outline-none' />
       </div>
-      <div className='rounded-lg bg-gray-200 p-6 w-auto inline-block text-center'>
+      <div className='rounded-lg bg-gray-200 p-6 w-auto inline-block text-center shadow-md'>
         {
           'rates' in data ? Object.keys(data.rates).sort().map((currencyCode, key) => {
             if (currencyCode !== currentBase) {
@@ -74,6 +74,7 @@ function App() {
                   </div>
                 </div>)
             }
+            return []
           }) : []
         }
       </div>
